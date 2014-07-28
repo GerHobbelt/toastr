@@ -29,13 +29,19 @@
 @light-grey: #CCCCCC;
 @white: #FFFFFF;
 @near-black: #030303;
+@near-black-t: rgba(3, 3, 3, 0.81);
 @green: #51A351;
+@green-t: rgba(81, 163, 81, 0.81);
 @red: #BD362F;
+@red-t: rgba(189, 54, 47, 0.81);
 @blue: #2F96B4;
+@blue-t: rgba(47, 150, 180, 0.80);
 @orange: #F89406;
+@orange-t: rgba(248, 148, 6, 0.81);
 
 // Styles
 .toast-title {
+	font-size: 16px;
 	font-weight: bold;
 }
 
@@ -58,7 +64,7 @@
 	right: -0.3em;
 	top: -0.3em;
 	float: right;
-	font-size: 20px;
+	font-size: 18px;
 	font-weight: bold;
 	color: @white;
 	-webkit-text-shadow: 0 1px 0 rgba(255,255,255,1);
@@ -68,6 +74,7 @@
 	&:hover,
 	&:focus {
 		color: @black;
+		background: transparent;
 		text-decoration: none;
 		cursor: pointer;
 		.opacity(0.4);
@@ -136,14 +143,14 @@ button.toast-close-button {
 		.borderRadius(3px 3px 3px 3px);
 		background-position: 15px center;
 		background-repeat: no-repeat;
-		.boxShadow(0 0 12px @grey);
+		//.boxShadow(0 0 12px @grey);
 		color: @white;
-		.opacity(0.8);
+		//.opacity(0.8);
 	}
 
 	> :hover {
 		.boxShadow(0 0 12px @black);
-		.opacity(1);
+		//.opacity(1);
 		cursor: pointer;
 	}
 
@@ -172,23 +179,38 @@ button.toast-close-button {
 }
 
 .toast {
-	background-color: @near-black;
+	background-color: @near-black-t;
+	&:hover {
+		background-color: @near-black;
+	}
 }
 
 .toast-success {
-	background-color: @green;
+	background-color: @green-t;
+	&:hover {
+		background-color: @green;
+	}
 }
 
 .toast-error {
-	background-color: @red;
+	background-color: @red-t;
+	&:hover {
+		background-color: @red;
+	}
 }
 
 .toast-info {
-	background-color: @blue;
+	background-color: @blue-t;
+	&:hover {
+		background-color: @blue;
+	}
 }
 
 .toast-warning {
-	background-color: @orange;
+	background-color: @orange-t;
+	&:hover {
+		background-color: @orange;
+	}
 }
 
 /*Responsive Design*/
