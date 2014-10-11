@@ -11,7 +11,9 @@
         topRight: 'toast-top-right',
         bottomRight: 'toast-bottom-right',
         bottomLeft: 'toast-bottom-left',
-        topLeft: 'toast-top-left'
+        topLeft: 'toast-top-left',
+        topCenter: 'toast-top-center',
+        bottomCenter: 'toast-bottom-center'
     };
     var sampleMsg = 'I don\'t think they really exist';
     var sampleTitle = 'ROUS';
@@ -379,6 +381,36 @@
         clearContainerChildren();
     });
 
+    test('event - prevent duplicate sequential toasts.', 1, function(){
+        toastr.options.preventDuplicates = true;
+
+        var $toast = [];
+        $toast[0] = toastr.info(sampleMsg, sampleTitle);
+        $toast[1] = toastr.info(sampleMsg, sampleTitle);
+        $toast[2] = toastr.info(sampleMsg + " 1", sampleTitle);
+        var $container = toastr.getContainer();
+
+        ok($container && $container.children().length === 2);
+
+        clearContainerChildren();
+    });
+
+    test('event - allow duplicate sequential toasts.', 1, function(){
+        toastr.options.preventDuplicates = false;
+
+        var $toast = [];
+        $toast[0] = toastr.info(sampleMsg, sampleTitle);
+        $toast[1] = toastr.info(sampleMsg, sampleTitle);
+        $toast[1] = toastr.info(sampleMsg, sampleTitle);
+        var $container = toastr.getContainer();
+
+        ok($container && $container.children().length === 3);
+
+        clearContainerChildren();
+    });
+
+
+
     module('order of appearance');
     test('Newest toast on top', 1, function () {
         //Arrange
@@ -463,6 +495,32 @@
         var $container = toastr.getContainer();
         //Assert
         ok($container.hasClass(positionClasses.topLeft), 'Has position top left');
+        //Teardown
+        $toast.remove();
+        resetContainer();
+    });
+    test('Container - position top-center', 1, function () {
+        //Arrange
+        resetContainer();
+        toastr.options.positionClass = positionClasses.topCenter;
+        //Act
+        var $toast = toastr.success(sampleMsg);
+        var $container = toastr.getContainer();
+        //Assert
+        ok($container.hasClass(positionClasses.topCenter), 'Has position top center');
+        //Teardown
+        $toast.remove();
+        resetContainer();
+    });
+    test('Container - position bottom-center', 1, function () {
+        //Arrange
+        resetContainer();
+        toastr.options.positionClass = positionClasses.bottomCenter;
+        //Act
+        var $toast = toastr.success(sampleMsg);
+        var $container = toastr.getContainer();
+        //Assert
+        ok($container.hasClass(positionClasses.bottomCenter), 'Has position bottom center');
         //Teardown
         $toast.remove();
         resetContainer();

@@ -1,8 +1,10 @@
 # toastr
 **toastr** is a Javascript library for non-blocking notifications. jQuery is required. The goal is to create a simple core library that can be customized and extended.
 
+[![Build Status](https://travis-ci.org/CodeSeven/toastr.svg)](https://travis-ci.org/CodeSeven/toastr)
+
 ## Current Version
-2.0.3
+2.1.0
 
 ## Demo
 - Demo can be found at http://codeseven.github.io/toastr/demo.html
@@ -106,6 +108,13 @@ Use the jQuery show/hide method of your choice. These default to fadeIn/fadeOut.
 
 	toastr.options.showMethod = 'slideDown'; 
 	toastr.options.hideMethod = 'slideUp'; 
+	
+
+###Timeouts
+Control how toastr interacts with users by setting timeouts appropriately.
+
+	toastr.options.timeout = 30; // How long the toast will display without user interaction
+	toastr.options.extendedTimeOut = 60; // How long the toast will display after a user hovers over it
 
 ## Building Toastr
 

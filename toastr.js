@@ -32,9 +32,11 @@
                 options: {},
                 subscribe: subscribe,
                 success: success,
-                version: '2.0.3',
+                version: '2.1.0',
                 warning: warning
             };
+
+            var previousToast;
 
             return toastr;
 
@@ -173,12 +175,13 @@
                     },
                     iconClass: 'toast-info',
                     positionClass: 'toast-top-right',
-                    timeOut: 5000, // Set timeOut and extendedTimeout to 0 to make it sticky
+                    timeOut: 5000, // Set timeOut and extendedTimeOut to 0 to make it sticky
                     titleClass: 'toast-title',
                     messageClass: 'toast-message',
                     target: 'body',
                     closeHtml: '<button>&times;</button>',
-                    newestOnTop: true
+                    newestOnTop: true,
+                    preventDuplicates: false
                 };
             }
 
@@ -190,6 +193,15 @@
             function notify(map) {
                 var options = getOptions(),
                     iconClass = map.iconClass || options.iconClass;
+
+                if(options.preventDuplicates){
+                    if(map.message === previousToast){
+                        return;
+                    }
+                    else{
+                        previousToast = map.message;
+                    }
+                }
 
                 if (typeof (map.optionsOverride) !== 'undefined') {
                     options = $.extend(options, map.optionsOverride);

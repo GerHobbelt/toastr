@@ -86,6 +86,12 @@
                         <label class="radio">
                             <input type="radio" name="positions" value="toast-bottom-full-width" />Bottom Full Width
                         </label>
+                        <label class="radio">
+                            <input type="radio" name="positions" value="toast-top-center" />Top Center
+                        </label>
+                        <label class="radio">
+                            <input type="radio" name="positions" value="toast-bottom-center" />Bottom Center
+                        </label>
                     </div>
                 </div>
             </div>
@@ -120,7 +126,7 @@
                         <label class="control-label" for="timeOut">Time out</label>
                         <input id="timeOut" type="text" placeholder="ms" class="input-mini" value="5000" />
 
-                        <label class="control-label" for="timeOut">Extended time out</label>
+                        <label class="control-label" for="extendedTimeOut">Extended time out</label>
                         <input id="extendedTimeOut" type="text" placeholder="ms" class="input-mini" value="1000" />
                     </div>
                 </div>
@@ -150,8 +156,6 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script src="toastr.js"></script>
-<script src="glimpse.js"></script>
-<script src="glimpse.toastr.js"></script>
 
 <script type="text/javascript">
     $(function () {
