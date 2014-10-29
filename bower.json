@@ -1,0 +1,25 @@
+{
+  "name": "rest-toastr",
+  "main": [
+    "toastr.js",
+    "toastr.css"
+  ],
+  "version": "2.0.4",
+  "homepage": "https://github.com/antmanler/toastr",
+  "authors": [
+    "Antmanler <antmanler@gmail.com>"
+  ],
+  "description": "fork from toastr, modified some styles",
+  "moduleType": [
+    "amd",
+    "globals"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
