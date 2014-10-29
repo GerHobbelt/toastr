@@ -181,7 +181,8 @@
                     target: 'body',
                     closeHtml: '<button>&times;</button>',
                     newestOnTop: true,
-                    preventDuplicates: false
+                    preventDuplicates: false,
+                    progressBar: false
                 };
             }
 
@@ -215,7 +216,13 @@
                     $toastElement = $('<div/>'),
                     $titleElement = $('<div/>'),
                     $messageElement = $('<div/>'),
+                    $progressElement = $('<div/>'),
                     $closeElement = $(options.closeHtml),
+                    progressBar = {
+                        intervalId: null,
+                        hideEta: null,
+                        maxHideTime: null
+                    },
                     response = {
                         toastId: toastId,
                         state: 'visible',
@@ -243,6 +250,11 @@
                     $toastElement.prepend($closeElement);
                 }
 
+                if (options.progressBar) {
+                    $progressElement.addClass('toast-progress');
+                    $toastElement.prepend($progressElement);
+                }
+
                 $toastElement.hide();
                 if (options.newestOnTop) {
                     $container.prepend($toastElement);
@@ -257,6 +269,11 @@
 
                 if (options.timeOut > 0) {
                     intervalId = setTimeout(hideToast, options.timeOut);
+                    progressBar.maxHideTime = parseFloat(options.timeOut);
+                    progressBar.hideEta = new Date().getTime() + progressBar.maxHideTime;
+                    if (options.progressBar) {
+                        progressBar.intervalId = setInterval(updateProgress, 10);
+                    }
                 }
 
                 $toastElement.hover(stickAround, delayedHideToast);
@@ -294,6 +311,7 @@
                     if ($(':focus', $toastElement).length && !override) {
                         return;
                     }
+                    clearTimeout(progressBar.intervalId);
                     return $toastElement[options.hideMethod]({
                         duration: options.hideDuration,
                         easing: options.hideEasing,
@@ -312,14 +330,22 @@
                 function delayedHideToast() {
                     if (options.timeOut > 0 || options.extendedTimeOut > 0) {
                         intervalId = setTimeout(hideToast, options.extendedTimeOut);
+                        progressBar.maxHideTime = parseFloat(options.extendedTimeOut);
+                        progressBar.hideEta = new Date().getTime() + progressBar.maxHideTime;
                     }
                 }
 
                 function stickAround() {
                     clearTimeout(intervalId);
+                    progressBar.hideEta = 0;
                     $toastElement.stop(true, true)[options.showMethod](
                         { duration: options.showDuration, easing: options.showEasing }
                     );
+                }
+
+                function updateProgress() {
+                    var percentage = ((progressBar.hideEta - (new Date().getTime())) / progressBar.maxHideTime) * 100;
+                    $progressElement.width(percentage + '%');
                 }
             }
 
